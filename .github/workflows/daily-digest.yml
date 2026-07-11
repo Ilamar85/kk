@@ -1,0 +1,50 @@
+name: Daily News, Weather & Deals Digest
+
+on:
+  schedule:
+    - cron: "0 11 * * *" # 08:00 America/Santiago (UTC-3/UTC-4)
+  workflow_dispatch: {}
+
+jobs:
+  run-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run digest pipeline
+        env:
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          NEWS_QUERY: ${{ vars.NEWS_QUERY }}
+          NEWS_COUNTRY: ${{ vars.NEWS_COUNTRY }}
+          NEWS_RSS_FEEDS: ${{ vars.NEWS_RSS_FEEDS }}
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+          WEATHER_CITY: ${{ vars.WEATHER_CITY }}
+          WEATHER_COUNTRY: ${{ vars.WEATHER_COUNTRY }}
+          DEALS_KEYWORDS: ${{ vars.DEALS_KEYWORDS }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python -m pipeline.main
+
+      - name: Upload digest artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest
+          path: output/*.md
+          if-no-files-found: ignore
