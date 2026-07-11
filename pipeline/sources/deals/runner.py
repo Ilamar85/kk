@@ -9,12 +9,13 @@ from pipeline.config import Config
 
 from .base import Deal
 from .falabella import FalabellaScraper
+from .mercadolibre import MercadoLibreScraper
 from .paris import ParisScraper
 from .ripley import RipleyScraper
 
 logger = logging.getLogger(__name__)
 
-SCRAPERS = [FalabellaScraper(), ParisScraper(), RipleyScraper()]
+SCRAPERS = [FalabellaScraper(), ParisScraper(), RipleyScraper(), MercadoLibreScraper()]
 
 
 def get_deals(config: Config) -> list[Deal]:

@@ -4,7 +4,7 @@ Pipeline que cada día:
 
 1. Obtiene noticias (NewsAPI + feeds RSS, ej. Reuters).
 2. Obtiene el clima actual (OpenWeatherMap).
-3. Scrapea ofertas en Falabella, Paris y Ripley con Playwright.
+3. Scrapea ofertas en Falabella, Paris, Ripley y MercadoLibre con Playwright, descartando publicaciones de MercadoLibre con envío internacional (que implican pagos extra de aduana/aranceles) y quedándose solo con entrega nacional en Chile.
 4. Genera un resumen en Markdown con GPT (OpenAI API).
 5. Envía el resumen por correo (HTML + texto plano).
 
@@ -22,7 +22,7 @@ pipeline/
     weather.py              # OpenWeatherMap
     deals/
       base.py                # tipos comunes (Deal, BaseDealScraper)
-      falabella.py, paris.py, ripley.py   # scrapers Playwright por tienda
+      falabella.py, paris.py, ripley.py, mercadolibre.py   # scrapers Playwright por tienda
       runner.py               # orquesta el navegador y agrega resultados
   delivery/
     email_sender.py          # renderiza Markdown->HTML y envía por SMTP
@@ -62,10 +62,15 @@ del repositorio (Settings → Secrets and variables → Actions).
 
 ## Notas sobre el scraping
 
-Los scrapers de Falabella, Paris y Ripley dependen de la estructura HTML actual de cada sitio.
+Los scrapers de Falabella, Paris, Ripley y MercadoLibre dependen de la estructura HTML actual de cada sitio.
 Si un sitio cambia su diseño, ese scraper puede dejar de encontrar resultados; el pipeline sigue
 funcionando igual con los datos de las otras tiendas (cada scraper falla de forma aislada y queda
 registrado en el log).
+
+En MercadoLibre, cada publicación se filtra por texto: si la tarjeta del producto menciona envío
+internacional, aduana, aranceles, "llega de [país extranjero]" u otro indicador de compra
+transfronteriza, la oferta se descarta (ver `INTERNATIONAL_MARKERS` en
+`pipeline/sources/deals/mercadolibre.py`). Solo quedan publicaciones de entrega nacional en Chile.
 
 ## Extender a otros canales de envío (Telegram, WhatsApp, Slack, Notion)
 
