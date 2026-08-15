@@ -30,7 +30,7 @@ jobs:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
           WEATHER_CITY: ${{ vars.WEATHER_CITY }}
           WEATHER_COUNTRY: ${{ vars.WEATHER_COUNTRY }}
-          DEALS_KEYWORDS: ${{ vars.DEALS_KEYWORDS }}
+          DEALS_KEYWORDS: ${{ vars.DEALS_KEYWORDS || 'pañales' }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
