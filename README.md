@@ -77,3 +77,29 @@ transfronteriza, la oferta se descarta (ver `INTERNATIONAL_MARKERS` en
 `pipeline/main.py` ya genera el Markdown final antes de enviarlo por correo. Para agregar otro canal,
 crea un módulo en `pipeline/delivery/` (ej. `telegram_sender.py`) con una función `send_*(config, subject, markdown_body)`
 y llámala desde `run()` en `pipeline/main.py`.
+
+## Monitor de precios Goodnites (`goodnites/`)
+
+Script independiente que compara el precio por unidad de pañales Goodnites L/XL (27-57 kg) en
+Salcobrand, Jesbriel, La Panalera, Jumbo y Mercado Libre, sin usar IA: lee meta-tags Open Graph
+y APIs JSON públicas de cada tienda.
+
+```
+goodnites/
+  monitor_precios.py     # recolecta precios y genera el reporte
+  historico.json          # últimas 52 corridas (se actualiza y commitea automáticamente)
+  ultimo_reporte.md        # reporte Markdown de la corrida más reciente
+  alerta.flag              # "1"/"0": si el mejor precio unitario está bajo el umbral
+```
+
+Ejecutar localmente:
+
+```bash
+cd goodnites
+python monitor_precios.py
+```
+
+`.github/workflows/goodnites-price-monitor.yml` corre el script todos los días vía GitHub Actions,
+commitea el histórico actualizado y, si `alerta.flag` marca `1` (precio unitario bajo
+`UMBRAL_ALERTA`, definido en el script), abre o comenta un issue etiquetado `goodnites-alerta`
+con el reporte.

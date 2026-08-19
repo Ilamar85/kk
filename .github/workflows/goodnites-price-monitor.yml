@@ -1,0 +1,56 @@
+name: Goodnites Price Monitor
+
+on:
+  schedule:
+    - cron: "0 13 * * *" # 09:00 America/Santiago (UTC-4)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check-prices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run price monitor
+        working-directory: goodnites
+        run: python monitor_precios.py
+
+      - name: Commit updated history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add goodnites/historico.json goodnites/ultimo_reporte.md
+          git diff --cached --quiet || git commit -m "Actualiza historico de precios Goodnites"
+          git push
+
+      - name: Open issue on price alert
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: goodnites
+        run: |
+          if [ "$(cat alerta.flag 2>/dev/null)" != "1" ]; then
+            echo "Sin alerta, no se abre issue."
+            exit 0
+          fi
+          gh label create goodnites-alerta --color FF0000 \
+            --description "Alerta de precio Goodnites bajo umbral" --force
+          existente=$(gh issue list --state open --label goodnites-alerta --json number --jq '.[0].number')
+          if [ -n "$existente" ]; then
+            gh issue comment "$existente" --body-file ultimo_reporte.md
+          else
+            gh issue create --title "Alerta de precio: Goodnites L/XL bajo umbral" \
+              --label goodnites-alerta --body-file ultimo_reporte.md
+          fi
