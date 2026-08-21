@@ -103,3 +103,20 @@ python monitor_precios.py
 commitea el histórico actualizado y, si `alerta.flag` marca `1` (precio unitario bajo
 `UMBRAL_ALERTA`, definido en el script), abre o comenta un issue etiquetado `goodnites-alerta`
 con el reporte.
+
+## Tema corporativo Arauco (`arauco_theme.js`)
+
+Módulo reutilizable de estilo (colores, fuentes, tamaños) para generar presentaciones `.pptx`
+con [pptxgenjs](https://gitbrent.github.io/PptxGenJS/), basado en la identidad visual usada en
+KOM_Implementacion_Tercer_Filtro_LV.
+
+```js
+const pptxgen = require("pptxgenjs");
+const { COLORS, FONT, SIZES, addTitle, addBody, tableStyle } = require("./arauco_theme.js");
+
+const pres = new pptxgen();
+pres.layout = "LAYOUT_WIDE"; // 13.3 x 7.5 in
+const slide = pres.addSlide();
+addTitle(slide, "Título de la lámina");
+pres.writeFile({ fileName: "salida.pptx" });
+```
