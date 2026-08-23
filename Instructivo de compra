@@ -1,0 +1,63 @@
+Monitor de Ofertas Retail (uso personal)
+
+Skill personal para cazar liquidaciones de ropa y calzado en Falabella, Paris y Ripley. Pensada para no perder tiempo revisando manualmente: solo reporta ofertas que realmente valen la pena según los criterios de abajo.
+
+Criterios fijos (no negociables salvo que el usuario los cambie explícitamente)
+Ítems buscados:
+Zapatillas Skechers Talla 41.5, 32 y 34
+Jeans Levi's, talla 34/32
+Ropa infantil, talla 10, 12 o 14
+Prendas North Face, talla M
+Prendas Tommy Hilfiger, talla L
+Descuento mínimo: 40% o más (si es menor, no reportar aunque parezca buena oferta)
+Condición de tarjeta: si el descuento requiere tarjeta de crédito, solo incluir la oferta si es con tarjeta Cencosud., "tarjeta Santander" y "Tarjeta Scotia" Si requiere otra tarjeta (o no se especifica), descartar o marcarlo claramente como no aplicable.
+
+Si en algún momento el usuario menciona otro ítem, talla o umbral distinto, trátalo como válido solo para esa consulta puntual — no sobrescribas estos criterios por defecto a menos que el usuario diga explícitamente que quiere actualizarlos.
+
+Flujo de trabajo
+1. Revisar correo (Gmail)
+
+De las tres tiendas, hoy solo Paris envía correos promocionales regulares (promociones@mail.paris.cl); Falabella solo manda boletas de compra y Ripley no suele aparecer en el correo. Aun así, revisa correo primero porque es rápido:
+
+Gmail:search_threads con query: from:mail.paris.cl newer_than:7d
+
+Lee el cuerpo de los correos relevantes (Gmail:get_thread) buscando menciones de los ítems de la lista.
+
+2. Revisar los sitios web (Falabella, Ripley, Paris)
+
+Como las ofertas específicas por talla/marca casi nunca están en el correo, hay que navegar directamente. Usa claude-in-chrome:
+
+Para cada tienda, navega al buscador con el término del ítem, por ejemplo:
+
+Falabella: https://www.falabella.com/falabella-cl/search?Ntt=zapatillas+skechers
+Ripley: https://simple.ripley.cl/search?source=search&terms=jeans+levis
+Paris: https://www.paris.cl/search/?query=north+face
+
+Repite por cada ítem de la lista en cada tienda (5 ítems × 3 tiendas). Usa get_page_text para extraer los resultados listados (nombre del producto, precio, % descuento si aparece en la grilla). Si el % de descuento no aparece en la grilla, entra al producto específico para confirmarlo.
+
+Importante:
+
+Nunca inicies sesión, guardes datos de pago, ni completes un CAPTCHA — si el sitio lo pide, detente y avísale al usuario.
+Si claude-in-chrome no responde o no está conectado, no reintentes repetidamente: avísale al usuario que el navegador no está disponible y, como respaldo, usa web_search (ej. "liquidación Falabella zapatillas Skechers 2026") para al menos dar una referencia, dejando claro que no es una verificación directa del sitio.
+3. Filtrar y verificar contra los criterios
+
+Antes de reportar cualquier oferta, confirma que cumple TODO:
+
+Es exactamente uno de los ítems/marcas de la lista
+La talla coincide (o el producto viene en la talla buscada)
+El descuento es ≥50%
+Si requiere tarjeta, es Cencosud (si no se puede confirmar la tarjeta, dilo explícitamente en vez de asumir)
+
+Descarta todo lo que no cumpla — no reportes "casi ofertas" para no generar ruido.
+
+4. Reportar el resultado
+
+Resumen directo en el chat, una fila por oferta encontrada:
+
+| Tienda | Producto | % Dcto | Precio | Condiciones (envío/impuestos/tarjeta) | Verificado | Enlace |
+
+Incluye la fecha/hora de verificación (momento en que se hizo la revisión). Si no se encontró ninguna oferta que cumpla los criterios, dilo explícitamente — no fuerces resultados ni bajes el umbral sin que el usuario lo pida.
+
+Notas
+Esta skill es de solo lectura: nunca agregues productos al carrito, inicies compra, ni ingreses datos personales o de pago en estos sitios.
+Si el navegador (claude-in-chrome) no está disponible, dilo claramente al inicio de la respuesta en vez de solo mostrar resultados parciales sin contexto.
