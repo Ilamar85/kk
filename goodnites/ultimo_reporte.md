@@ -1,4 +1,4 @@
-# Precios Goodnites L/XL - 27-08-2026 18:52
+# Precios Goodnites L/XL - 28-08-2026 18:57
 
 | Tienda | Un. | Precio | $/unidad | Stock |
 |---|---|---|---|---|
@@ -11,9 +11,6 @@
 
 **Mejor opcion:** Jesbriel - $772/unidad
 https://www.jesbrielpanales.cl/productos/panal-goodnites-calzon-27-57kg-talla-l-xl-11-unidades/
-
-## Cambios vs. corrida anterior
-- Salcobrand (11 un): baja $29/un ($818 -> $789)
 
 ## Fuentes sin dato
 - Jumbo: JSONDecodeError - Expecting value: line 1 column 1 (char 0)
