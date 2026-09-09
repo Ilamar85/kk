@@ -1,4 +1,4 @@
-# Precios Goodnites L/XL - 08-09-2026 13:08
+# Precios Goodnites L/XL - 09-09-2026 13:04
 
 | Tienda | Un. | Precio | $/unidad | Stock |
 |---|---|---|---|---|
