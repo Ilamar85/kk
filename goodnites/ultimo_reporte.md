@@ -1,9 +1,9 @@
-# Precios Goodnites L/XL - 09-09-2026 13:04
+# Precios Goodnites L/XL - 10-09-2026 12:56
 
 | Tienda | Un. | Precio | $/unidad | Stock |
 |---|---|---|---|---|
-| Jesbriel | 11 | $8.490 | **$772** | 5 |
-| Jesbriel (caja) | 44 | $35.960 | **$817** | 73 |
+| Jesbriel | 11 | $8.490 | **$772** | 0 |
+| Jesbriel (caja) | 44 | $35.960 | **$817** | 0 |
 | La Panalera | 44 | $35.990 (-16%) | **$818** | instock |
 | Salcobrand | 11 | $9.919 (-20%) | **$902** | in stock |
 | La Panalera | 11 | $9.975 | **$907** | oos |
