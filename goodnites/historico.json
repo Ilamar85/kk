@@ -1,64 +1,5 @@
 [
   {
-    "fecha": "2026-08-19T09:48:20.163071-04:00",
-    "filas": [
-      {
-        "tienda": "Jesbriel",
-        "unidades": 11,
-        "precio": 8990,
-        "precio_normal": null,
-        "stock": "254",
-        "url": "https://www.jesbrielpanales.cl/productos/panal-goodnites-calzon-27-57kg-talla-l-xl-11-unidades/",
-        "unitario": 817
-      },
-      {
-        "tienda": "Jesbriel (caja)",
-        "unidades": 44,
-        "precio": 35960,
-        "precio_normal": null,
-        "stock": "77",
-        "url": "https://www.jesbrielpanales.cl/productos/panal-goodnites-calzon-27-57kg-talla-l-xl-4-x-11-unidades-caja/",
-        "unitario": 817
-      },
-      {
-        "tienda": "Salcobrand",
-        "unidades": 11,
-        "precio": 8999,
-        "precio_normal": 11499,
-        "stock": "in stock",
-        "url": "https://salcobrand.cl/products/ropa-interior-desechable-goodnites-unisex-talla-l-11-unidades",
-        "unitario": 818
-      },
-      {
-        "tienda": "La Panalera",
-        "unidades": 44,
-        "precio": 35990,
-        "precio_normal": 42990,
-        "stock": "instock",
-        "url": "https://www.lapanalera.cl/panal-goodnites-pants-talla-l-xl-44-unidades",
-        "unitario": 818
-      },
-      {
-        "tienda": "La Panalera",
-        "unidades": 11,
-        "precio": 9975,
-        "precio_normal": 9975,
-        "stock": "instock",
-        "url": "https://www.lapanalera.cl/panal-goodnites-pants-talla-l-xl-11-unidades",
-        "unitario": 907
-      },
-      {
-        "tienda": "La Panalera",
-        "unidades": 22,
-        "precio": 19950,
-        "precio_normal": 19950,
-        "stock": "instock",
-        "url": "https://www.lapanalera.cl/panal-goodnites-pants-talla-l-xl-22-unidades",
-        "unitario": 907
-      }
-    ]
-  },
-  {
     "fecha": "2026-08-20T09:50:49.591202-04:00",
     "filas": [
       {
@@ -2272,6 +2213,38 @@
   },
   {
     "fecha": "2026-10-09T14:42:29.537599-04:00",
+    "filas": [
+      {
+        "tienda": "Salcobrand",
+        "unidades": 11,
+        "precio": 8059,
+        "precio_normal": 12399,
+        "stock": "in stock",
+        "url": "https://salcobrand.cl/products/ropa-interior-desechable-goodnites-unisex-talla-l-11-unidades",
+        "unitario": 733
+      },
+      {
+        "tienda": "Jesbriel",
+        "unidades": 11,
+        "precio": 8490,
+        "precio_normal": null,
+        "stock": "0",
+        "url": "https://www.jesbrielpanales.cl/productos/panal-goodnites-calzon-27-57kg-talla-l-xl-11-unidades/",
+        "unitario": 772
+      },
+      {
+        "tienda": "Jesbriel (caja)",
+        "unidades": 44,
+        "precio": 35960,
+        "precio_normal": null,
+        "stock": "0",
+        "url": "https://www.jesbrielpanales.cl/productos/panal-goodnites-calzon-27-57kg-talla-l-xl-4-x-11-unidades-caja/",
+        "unitario": 817
+      }
+    ]
+  },
+  {
+    "fecha": "2026-10-10T13:42:34.667129-04:00",
     "filas": [
       {
         "tienda": "Salcobrand",

@@ -1,4 +1,4 @@
-# Precios Goodnites L/XL - 09-10-2026 14:42
+# Precios Goodnites L/XL - 10-10-2026 13:42
 
 | Tienda | Un. | Precio | $/unidad | Stock |
 |---|---|---|---|---|
@@ -8,9 +8,6 @@
 
 **Mejor opcion:** Salcobrand - $733/unidad
 https://salcobrand.cl/products/ropa-interior-desechable-goodnites-unisex-talla-l-11-unidades
-
-## Cambios vs. corrida anterior
-- Salcobrand (11 un): sube $113/un ($620 -> $733)
 
 ## Fuentes sin dato
 - La Panalera 11un: precio no encontrado
